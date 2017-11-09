@@ -7,6 +7,8 @@ conn %default
     closeaction=restart
     dpdaction=restart
 
+
+############################client###############################
 conn rw
     keyexchange=ikev2
     leftca=ca.cert.pem
@@ -26,8 +28,9 @@ conn rw
     esp=aes-sha1-modp1024
     lifetime=86400s
     auto=start
+#############################end#################################
 
-
+############################server###############################
 conn vpn-manyutest-client
     keyexchange=ikev2
     leftca=ca.alitest.cert.pem
@@ -47,4 +50,5 @@ conn vpn-manyutest-client
     esp=aes-sha1-modp1024
     lifetime=86400s
     auto=start
+#############################end################################
 
