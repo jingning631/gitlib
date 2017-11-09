@@ -1,0 +1,50 @@
+# ipsec.conf - strongSwan IPsec configuration file
+
+config setup
+    uniqueids=never
+
+conn %default
+    closeaction=restart
+    dpdaction=restart
+
+conn rw
+    keyexchange=ikev2
+    leftca=ca.cert.pem
+    left=%any
+    leftsourceip=%config
+    leftauth=pubkey
+    leftid="C=CN, O=GENEEGROUP, CN=manyu.yin.server.genee.com"      #本地端标识，使用客户端证书的DN
+    leftcert=manyu.yin.server.genee.com.cert.pem
+    leftsubnet=10.1.0.0/16
+    right=123.59.41.56
+    rightid="C=CN, O=GENEEGROUP, CN=123.59.41.56"           #远程端标识，使用VPN服务器证书的DN
+    rightcert=server.cert.pem
+    rightsubnet=10.1.0.0/16
+    rightauth=pubkey
+    ike=aes-sha1-modp1024
+    ikelifetime=86400s
+    esp=aes-sha1-modp1024
+    lifetime=86400s
+    auto=start
+
+
+conn vpn-manyutest-client
+    keyexchange=ikev2
+    leftca=ca.alitest.cert.pem
+    left=%any
+    leftsourceip=%config
+    leftauth=pubkey
+    leftid="C=CN, O=MANYUTEST, CN=alitest.vpn.com"      #本地端标识，使用客户端证书的DN
+    leftcert=alitest.vpn.com.cert.pem
+    leftsubnet=172.17.205.0/24
+    right=47.95.120.221
+    rightid="C=CN, O=MANYUTEST, CN=47.95.120.221"           #远程端标识，使用VPN服务器证书的DN
+    rightcert=server.alitest.cert.pem
+    rightsubnet=172.17.205.0/24
+    rightauth=pubkey
+    ike=aes-sha1-modp1024
+    ikelifetime=86400s
+    esp=aes-sha1-modp1024
+    lifetime=86400s
+    auto=start
+
